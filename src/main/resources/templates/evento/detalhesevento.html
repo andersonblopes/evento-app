@@ -34,10 +34,20 @@
 		</form>
 		
 		</div>
+		
+		<div class="container">
+			<h5>Lista de Convidados</h5>
+			<div class="row" th:each="convidado : ${convidados}">
+				<div class="input-field col s6">
+					<p><span th:text="${convidado.nomeConvidado}"></span></p>
+				</div>
+				<div class="input-field col s3">
+					<p><span th:text="${convidado.rg}"></span></p>
+				</div>
+			</div>
+		</div>
 	
-	</body>
-
-	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	</body>
 </html>	
