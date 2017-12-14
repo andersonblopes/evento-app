@@ -1,0 +1,21 @@
+.detalhe-evento {
+	box-shadow: 2px 2px 5px grey;
+	padding: 20px 20px 0px 20px;
+	margin-bottom: 60px;
+}
+
+.form-convidado {
+	box-shadow: 2px 2px 5px grey;
+	padding: 20px;
+	margin-bottom: 60px;
+}
+
+.table-convidado {
+	width: 50%;
+}
+
+.form-evento {
+	box-shadow: 2px 2px 5px grey;
+	padding: 20px;
+	margin-bottom: 60px;
+}
