@@ -19,6 +19,7 @@
 	<h1>Cadastro de Evento</h1>
 	<h3><a class="waves-effect waves-light btn" href="/eventos"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h3>
 
+
 	<form class="container" method="post">
 		<div class="row">
 			Nome: <input type="text" value="" name="nome"/>
@@ -32,8 +33,14 @@
 				Horário: <input type="text" value="" name="horario"/>
 			</div>
 		</div>
-		
-		<button type="submit" class="waves-effect waves-light btn">Salvar</button>
+		<div class="row">
+			<div class="input-field col s2">
+				<button type="submit" class="waves-effect waves-light btn">Salvar</button>
+			</div>
+			<div class="input-field col s2">
+				<th:block th:include="mensage-validacao"></th:block>
+			</div>
+		</div>
 	</form>
 </body>
 

@@ -1,11 +1,15 @@
 package com.appevento.eventoapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.appevento.eventoapp.model.Convidado;
 import com.appevento.eventoapp.model.Evento;
@@ -27,9 +31,13 @@ public class EventoController {
 	}
 
 	@RequestMapping(value = "/cadastroevento", method = RequestMethod.POST)
-	public String form(Evento evento) {
-
+	public String form(@Valid Evento evento, BindingResult result, RedirectAttributes atributes) {
+		if (result.hasErrors()) {
+			atributes.addFlashAttribute("mensagem", "Verifique os campos!");
+			return "redirect:/cadastroevento";
+		}
 		eventoRepository.save(evento);
+		atributes.addFlashAttribute("mensagem", "Evento cadastrado com sucesso!");
 		return "redirect:/cadastroevento";
 	}
 
@@ -50,15 +58,21 @@ public class EventoController {
 		Iterable<Convidado> convidados = convidadoRepository.findByEvento(eventoEspecifico);
 
 		modelAndView.addObject("convidados", convidados);
-		
+
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public String detalhesEventoPost(@PathVariable("id") long id, Convidado convidado) {
+	public String detalhesEventoPost(@PathVariable("id") long id, @Valid Convidado convidado, BindingResult result,
+			RedirectAttributes atributes) {
+		if (result.hasErrors()) {
+			atributes.addFlashAttribute("mensagem", "Verifique os campos!");
+			return "redirect:/{id}";
+		}
 		Evento evento = eventoRepository.findById(id);
 		convidado.setEvento(evento);
 		convidadoRepository.save(convidado);
+		atributes.addFlashAttribute("mensagem", "Convidado salvo com sucesso!");
 		return "redirect:/{id}";
 
 	}
